@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013/04/27 13:41:35.006.pas,C:\Users\Administrator\Documents\RAD Studio\Projects\Unit1.pas=C:\Users\Administrator\Documents\RAD Studio\Projects\brickgame.pas</Transaction>
+    <Transaction>2013/04/27 13:41:35.006.dfm,C:\Users\Administrator\Documents\RAD Studio\Projects\Unit1.dfm=C:\Users\Administrator\Documents\RAD Studio\Projects\brickgame.dfm</Transaction>
+    <Transaction>2013/04/27 15:00:06.031.dproj,C:\Users\Administrator\Documents\RAD Studio\Projects\Project1.dproj=C:\Users\Administrator\Documents\RAD Studio\Projects\brick.dproj</Transaction>
+    <Transaction>2013/04/27 15:26:10.821.dproj,C:\Users\Administrator\Documents\RAD Studio\Projects\brick.dproj=C:\Users\Administrator\Documents\RAD Studio\Projects\brickGame\brick.dproj</Transaction>
+  </Transactions>
+</BorlandProject>
