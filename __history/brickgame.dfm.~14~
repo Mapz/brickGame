@@ -11,7 +11,6 @@ object MainForm: TMainForm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object statusText: TLabel
@@ -108,6 +107,15 @@ object MainForm: TMainForm
     Caption = #39640#20998
     TabOrder = 1
     OnClick = highScoreButtonClick
+  end
+  inline HSFrame1: THSFrame
+    Left = 152
+    Top = 175
+    Width = 494
+    Height = 320
+    TabOrder = 2
+    ExplicitLeft = 152
+    ExplicitTop = 175
   end
   object frameControl: TTimer
     Interval = 1

@@ -1,0 +1,75 @@
+unit hsframeA;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, DB, ADODB;
+
+type
+  ThighScoreForm = class(TForm)
+    highscoreText: TMemo;
+    confirm: TButton;
+    clear: TButton;
+    procedure qeuryHighScore;
+    procedure confirmClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  highScoreForm: ThighScoreForm;
+  hsRecordset:Variant;
+
+implementation
+  uses
+      brickgame;
+{$R *.dfm}
+
+procedure ThighScoreForm.confirmClick(Sender: TObject);
+begin
+  with brickgame.MainForm do
+   switchStatus(gs,gamestatus.inGame);
+  close;
+end;
+
+
+procedure ThighScoreForm.qeuryHighScore;
+var
+  icount,i:integer;
+begin
+  with brickgame.MainForm do
+    try
+    if cnnSqlite.Connected=false then cnnSqlite.open;
+    if sQry.Active then sQry.Close;
+    sQry.sql.clear;
+    sQry.sql.text := 'select * from highscore order by score';
+    sQry.open;
+    icount := sQry.RecordCount;
+    highscoreText.Text := 'playerName\tscore';
+    for i := 0 to icount - 1 do
+    begin
+        highscoreText.Text :=   highscoreText.Text + '\n' +
+        sQry.FieldByName('playerName').AsString + '\t' +
+        sQry.FieldByName('score').AsString;
+        sQry.Next;
+
+    end;
+
+
+
+    finally
+    cnnSqlite.Close;
+  end;
+end;
+
+
+procedure ThighScoreForm.FormCreate(Sender: TObject);
+begin
+      qeuryHighScore;
+end;
+
+end.

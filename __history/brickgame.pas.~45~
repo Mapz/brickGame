@@ -161,7 +161,7 @@ begin
    if highScoreForm = nil then
     highScoreForm := ThighScoreForm.Create(self);
    highScoreForm.show;
-   highScoreForm.qeuryHighScore;
+   qeuryHighScore;
    switchStatus(gs,gamestatus.pause);
 end;
 

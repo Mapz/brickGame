@@ -23,7 +23,7 @@ type
     statusDialog: TLabel;
     statusDialogYes: TButton;
     statusDialogNo: TButton;
-    highScoreForm: hsframeA.ThighScoreForm;
+    highScoreForm: ThighScoreForm;
     NameInput: TEdit;
     LabelNameText: TLabel;
     procedure gamePanelMouseMove(Sender: TObject; Shift: TShiftState; X,
@@ -97,12 +97,6 @@ begin
             statusText.Caption := 'ÔÝÍ£';
             gs := Gamestatus.pause;
             end;
-   if curStatus =  GameStatus.pause then
-    if nextstatus = gamestatus.ingame then
-            begin
-            statusText.Caption := 'ÓÎÏ·ÖÐ';
-            gs := Gamestatus.ingame;
-            end;
 end;
 
 procedure TMainForm.insertHighScore;
@@ -110,7 +104,6 @@ begin
   if NameInput.Text = '' then NameInput.Text := 'ÄäÃû';
    try
     if cnnSqlite.Connected=false then cnnSqlite.open;
-    if sQry.Active then sQry.Close;
     sQry.sql.clear;
     sQry.sql.text := 'select * from highscore';
     sQry.open;
@@ -159,9 +152,8 @@ end;
 procedure TMainForm.highScoreButtonClick(Sender: TObject);
 begin
    if highScoreForm = nil then
-    highScoreForm := ThighScoreForm.Create(self);
+    highScoreForm := ThighScoreForm.Create(Application);
    highScoreForm.show;
-   highScoreForm.qeuryHighScore;
    switchStatus(gs,gamestatus.pause);
 end;
 

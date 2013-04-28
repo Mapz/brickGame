@@ -1,0 +1,61 @@
+unit hsframeA;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, DB, ADODB;
+
+type
+  ThighScoreForm = class(TForm)
+    highscoreText: TMemo;
+    confirm: TButton;
+    clear: TButton;
+    ADOTable1: TADOTable;
+    procedure qeuryHighScore;
+    procedure confirmClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  highScoreForm: ThighScoreForm;
+
+implementation
+  uses
+      brickgame;
+{$R *.dfm}
+
+procedure ThighScoreForm.confirmClick(Sender: TObject);
+begin
+  with brickgame.MainForm do
+   switchStatus(gs,gamestatus.inGame);
+  close;
+end;
+
+
+procedure ThighScoreForm.qeuryHighScore;
+begin
+  with brickgame.MainForm do
+    try
+    if cnnSqlite.Connected=false then cnnSqlite.open;
+    sQry.sql.clear;
+    sQry.sql.text := 'select * from highscore order by score';
+    sQry.open;
+    sQry.ExecSQL;
+    finally
+    cnnSqlite.Close;
+  end;
+end;
+
+
+procedure ThighScoreForm.FormCreate(Sender: TObject);
+begin
+      qeuryHighScore;
+end;
+
+end.

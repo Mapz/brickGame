@@ -110,7 +110,6 @@ begin
   if NameInput.Text = '' then NameInput.Text := 'ÄäÃû';
    try
     if cnnSqlite.Connected=false then cnnSqlite.open;
-    if sQry.Active then sQry.Close;
     sQry.sql.clear;
     sQry.sql.text := 'select * from highscore';
     sQry.open;
@@ -161,7 +160,6 @@ begin
    if highScoreForm = nil then
     highScoreForm := ThighScoreForm.Create(self);
    highScoreForm.show;
-   highScoreForm.qeuryHighScore;
    switchStatus(gs,gamestatus.pause);
 end;
 
