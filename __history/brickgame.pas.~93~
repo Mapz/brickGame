@@ -13,7 +13,7 @@ type
   end;
 
   BoardMoveStatus = (up, down, stop);
-  GameStatus = (init, inGame, pause, dead, load, win, allOver, unkonwn);
+  GameStatus = (init, inGame, pause, dead, load, win, allOver,unkonwn);
 
   TMainForm = class(TForm)
     gamePanel: TPanel;
@@ -59,7 +59,7 @@ var
   MainForm: TMainForm;
   bms: BoardMoveStatus = BoardMoveStatus.stop;
   gs: GameStatus = GameStatus.init;
-  lastStatus: GameStatus = GameStatus.unkonwn;
+  lastStatus:Gamestatus = gamestatus.unkonwn;
   canControl: boolean = false;
   boardSpeed: Integer = 4;
   ballSpeedx: Integer = 5;
@@ -319,10 +319,9 @@ begin
       statusText.Caption := '游戏中';
       gs := GameStatus.inGame;
     end;
-  if curStatus = GameStatus.allOver then
+  if curStatus = GameStatus.allover then
     if nextStatus = GameStatus.init then
     begin
-      stagecount := 1;
       statusText.Caption := '初始化';
       gs := GameStatus.init;
     end;
@@ -435,7 +434,7 @@ begin
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
-begin;
+begin ;
 end;
 
 procedure TMainForm.frameControlTimer(Sender: TObject);

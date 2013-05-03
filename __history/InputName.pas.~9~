@@ -1,0 +1,96 @@
+unit InputName;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls;
+
+type
+  TInputNameDialog = class(TForm)
+    NameLabel: TLabel;
+    NameInputText: TEdit;
+    inputNameConfirm: TButton;
+    inputNameCacel: TButton;
+    inputNameLabel: TLabel;
+    procedure inputNameConfirmClick(Sender: TObject);
+    procedure inputNameCacelClick(Sender: TObject);
+    procedure insertHighScore;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  InputNameDialog: TInputNameDialog;
+
+implementation
+
+uses
+  brickgame;
+{$R *.dfm}
+
+procedure TInputNameDialog.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  with brickgame.mainform do
+  begin
+    if gs <> GameStatus.dead then
+      exit;
+    switchStatus(gs, GameStatus.init);
+  end;
+  close;
+end;
+
+procedure TInputNameDialog.inputNameCacelClick(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TInputNameDialog.inputNameConfirmClick(Sender: TObject);
+begin
+  with brickgame.mainform do
+  begin
+    case subStatus of
+      0:
+        begin
+          insertHighScore;
+          statusText.Caption := '保存成功，再来一局？';
+          inputnamelabel.Caption := '保存成功，再来一局？';
+          subStatus := subStatus + 1;
+          exit;
+        end;
+      1:
+        begin
+          switchStatus(gs, GameStatus.init);
+          inputnamelabel.Caption := '游戏结束，输入你的大名';
+          close;
+        end;
+    end;
+  end;
+end;
+
+procedure TInputNameDialog.insertHighScore;
+begin
+  if NameInputText.text = '' then
+    NameInputText.text := '匿名';
+  with brickgame.mainform do
+    try
+      if cnnSqlite.Connected = false then
+        cnnSqlite.open;
+      if sQry.Active then
+        sQry.close;
+      sQry.sql.clear;
+      sQry.sql.text := 'select * from highscore';
+      sQry.open;
+      sQry.Append;
+      sQry.FieldByName('playerName').AsString := NameInputText.text;
+      sQry.FieldByName('score').AsInteger := score;
+      sQry.Post;
+    finally
+      cnnSqlite.close;
+    end;
+end;
+
+end.

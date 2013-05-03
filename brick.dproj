@@ -44,7 +44,16 @@
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
 			<DCCReference Include="brickgame.pas">
-				<Form>Form1</Form>
+				<Form>MainForm</Form>
+			</DCCReference>
+			<DCCReference Include="hsframeA.pas">
+				<Form>highScoreForm</Form>
+			</DCCReference>
+			<DCCReference Include="InputName.pas">
+				<Form>InputNameDialog</Form>
+			</DCCReference>
+			<DCCReference Include="winForm.pas">
+				<Form>winFormA</Form>
 			</DCCReference>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
@@ -100,6 +109,7 @@
 						<Source Name="MainSource">brick.dpr</Source>
 					</Source>
 				</Delphi.Personality>
+				<ModelSupport>False</ModelSupport>
 			</BorlandProject>
 			<ProjectFileVersion>12</ProjectFileVersion>
 		</ProjectExtensions>

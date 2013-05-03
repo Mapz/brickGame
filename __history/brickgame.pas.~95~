@@ -435,7 +435,7 @@ begin
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
-begin;
+begin ;
 end;
 
 procedure TMainForm.frameControlTimer(Sender: TObject);

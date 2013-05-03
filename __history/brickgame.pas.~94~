@@ -322,7 +322,6 @@ begin
   if curStatus = GameStatus.allOver then
     if nextStatus = GameStatus.init then
     begin
-      stagecount := 1;
       statusText.Caption := '≥ı ºªØ';
       gs := GameStatus.init;
     end;
@@ -435,7 +434,7 @@ begin
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
-begin;
+begin ;
 end;
 
 procedure TMainForm.frameControlTimer(Sender: TObject);

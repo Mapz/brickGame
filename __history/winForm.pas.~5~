@@ -1,0 +1,43 @@
+unit winForm;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls;
+
+type
+  TwinFormA = class(TForm)
+    nextStage: TButton;
+    Label1: TLabel;
+    procedure nextStageClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  winFormA: TwinFormA;
+
+implementation
+
+uses
+  brickgame;
+{$R *.dfm}
+
+procedure TwinFormA.nextStageClick(Sender: TObject);
+begin
+  with brickgame.MainForm do
+  begin
+    case gs of
+      win:
+        switchstatus(gs, gamestatus.init);
+      allover:
+        winFormA.close;
+    end;
+
+  end;
+end;
+
+end.

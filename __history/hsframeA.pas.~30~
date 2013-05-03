@@ -56,6 +56,9 @@ begin
         sQry.FieldByName('score').AsString;
         sQry.Next;
     end;
+
+
+
     finally
     cnnSqlite.Close;
   end;

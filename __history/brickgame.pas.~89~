@@ -13,7 +13,7 @@ type
   end;
 
   BoardMoveStatus = (up, down, stop);
-  GameStatus = (init, inGame, pause, dead, load, win, allOver, unkonwn);
+  GameStatus = (init, inGame, pause, dead, load, win, allOver);
 
   TMainForm = class(TForm)
     gamePanel: TPanel;
@@ -59,7 +59,6 @@ var
   MainForm: TMainForm;
   bms: BoardMoveStatus = BoardMoveStatus.stop;
   gs: GameStatus = GameStatus.init;
-  lastStatus: GameStatus = GameStatus.unkonwn;
   canControl: boolean = false;
   boardSpeed: Integer = 4;
   ballSpeedx: Integer = 5;
@@ -262,8 +261,8 @@ begin
       statusText.Caption := '胜利';
       if winforma = nil then
         winforma := TwinFormA.Create(self);
-      gs := GameStatus.win;
       winforma.show;
+      gs := GameStatus.win;
     end;
   end;
 
@@ -288,14 +287,15 @@ begin
       statusText.Caption := '游戏中';
       gs := GameStatus.inGame;
     end
-    else if nextStatus = allOver then
+    else
+    if nextStatus = allover then
     begin
       statusText.Caption := '你完成了所有关卡！';
       if winforma = nil then
-      begin
+        begin
         winforma := TwinFormA.Create(self);
-      end;
-      gs := GameStatus.allOver;
+        end;
+      gs := GameStatus.allover;
       winforma.show;
     end;
 
@@ -319,14 +319,6 @@ begin
       statusText.Caption := '游戏中';
       gs := GameStatus.inGame;
     end;
-  if curStatus = GameStatus.allOver then
-    if nextStatus = GameStatus.init then
-    begin
-      stagecount := 1;
-      statusText.Caption := '初始化';
-      gs := GameStatus.init;
-    end;
-  lastStatus := curStatus;
 end;
 
 procedure TMainForm.gamedead;
@@ -435,7 +427,7 @@ begin
 end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
-begin;
+begin ;
 end;
 
 procedure TMainForm.frameControlTimer(Sender: TObject);
